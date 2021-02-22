@@ -1,0 +1,41 @@
+{
+  "generator-jhipster": {
+    "promptValues": {
+      "packageName": "me.amplitudo.elearning",
+      "nativeLanguage": "en"
+    },
+    "jhipsterVersion": "6.10.5",
+    "applicationType": "monolith",
+    "baseName": "elearning",
+    "packageName": "me.amplitudo.elearning",
+    "packageFolder": "me/amplitudo/elearning",
+    "serverPort": "8080",
+    "authenticationType": "jwt",
+    "cacheProvider": "ehcache",
+    "enableHibernateCache": true,
+    "websocket": "spring-websocket",
+    "databaseType": "sql",
+    "devDatabaseType": "mysql",
+    "prodDatabaseType": "mysql",
+    "searchEngine": false,
+    "messageBroker": false,
+    "serviceDiscoveryType": false,
+    "buildTool": "maven",
+    "enableSwaggerCodegen": false,
+    "jwtSecretKey": "N2ZjOGE5MmM3OWQ4ZWUzMjUyNTczN2IxYWVmMjU5Y2RjZWY2OTRlYjk5OTg1Y2RiNWU4OTMzMGE3ZjEwMmM2ZmZhNzFhMWMyNWIxOGJhOGQzNzYzZmVhMmEyMjBmNTQ3NzdmZWM5NTRkNGJmMWJkYzYxZTgzY2RhOTFkYWZhNDc=",
+    "embeddableLaunchScript": false,
+    "useSass": true,
+    "clientPackageManager": "npm",
+    "skipClient": true,
+    "creationTimestamp": 1614016031997,
+    "testFrameworks": [],
+    "jhiPrefix": "jhi",
+    "entitySuffix": "",
+    "dtoSuffix": "DTO",
+    "otherModules": [],
+    "enableTranslation": true,
+    "nativeLanguage": "en",
+    "languages": ["en", "sr"],
+    "blueprints": []
+  }
+}
