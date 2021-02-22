@@ -1,0 +1,115 @@
+entity Faculty {
+	name String required
+    dateCreated Instant
+    dateUpdated Instant
+}
+entity Orientation {
+	name String required
+    dateCreated Instant
+    dateUpdated Instant
+}
+
+entity Course {
+    name String required
+    dateCreated Instant
+    dateUpdated Instant
+}
+
+entity Year {
+    name String required
+    dateCreated Instant
+    dateUpdated Instant
+}
+
+entity Building {
+	name String required
+    location String required
+    latitude BigDecimal required
+    longitude BigDecimal required
+    dateCreated Instant
+    dateUpdated Instant
+}
+
+entity Notification {
+	title String required
+    description String required
+    isRead Boolean required
+    dateCreated Instant
+    dateUpdated Instant
+}
+
+entity Assignment {
+  	title String required
+    description String required
+    maxPoints Integer required
+    deadLine Instant required
+    filePath String required
+    fileTypeIconPath String required
+    dateCreated Instant
+    dateUpdated Instant
+}
+
+entity AssignmentUser {
+	points Integer
+    filePath String
+    fileTypeIconPath String
+    dateCreated Instant
+    dateUpdated Instant
+}
+
+entity Lecture {
+	title String required
+    description String required		
+    materialFilePath String required
+    fileTypeIconPath String required
+	dateCreated Instant
+    dateUpdated Instant
+}
+
+entity Profile {
+	phoneNumber String 
+    dateOfBirth LocalDate
+    index Integer
+    yearOfEnrollment Integer
+    verificationNumber String
+    isApproved Boolean
+    dateCreated Instant
+    dateUpdated Instant
+}
+
+relationship OneToOne{
+	Profile{user} to User
+}
+relationship OneToMany {
+	Faculty{orientations} to Orientation{faculty},
+    Building{faculties} to Faculty{building},
+    Assignment{assignmentUsers} to AssignmentUser{assignment},
+    User{assignmentUsers} to AssignmentUser{user},
+    Year{users} to User{year}, 
+    Orientation{users} to User{faculty},
+    User{lectures} to Lecture{user},
+    Course{notifications} to Notification{course},
+    User{notifications} to Notification{user},
+    User{assignments} to Assignment{user},
+    Course{assignments} to Assignment{course},
+    Lecture{course} to Course{lectures}
+}
+
+relationship ManyToOne{
+	Course{professor} to User,
+    Course{assistant} to User,
+    Course{year} to Year
+}
+
+relationship ManyToMany {
+	Faculty{orientations} to Orientation{faculties},
+    Faculty{users} to User{faculties},
+    Course{orientations} to Orientation{courses},
+    Course{users} to User{courses}
+}
+
+dto * with mapstruct
+paginate * with pagination
+service * with serviceClass
+filter * 
+
