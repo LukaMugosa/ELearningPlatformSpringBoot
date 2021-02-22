@@ -49,7 +49,7 @@ entity Assignment {
     dateUpdated Instant
 }
 
-entity AssignmentUser {
+entity AssignmentProfile {
 	points Integer
     filePath String
     fileTypeIconPath String
@@ -59,7 +59,7 @@ entity AssignmentUser {
 
 entity Lecture {
 	title String required
-    description String required		
+    description String required
     materialFilePath String required
     fileTypeIconPath String required
 	dateCreated Instant
@@ -67,7 +67,7 @@ entity Lecture {
 }
 
 entity Profile {
-	phoneNumber String 
+	phoneNumber String
     dateOfBirth LocalDate
     index Integer
     yearOfEnrollment Integer
@@ -78,38 +78,47 @@ entity Profile {
 }
 
 relationship OneToOne{
-	Profile{user} to User
+	Profile{user} to Profile
 }
 relationship OneToMany {
 	Faculty{orientations} to Orientation{faculty},
     Building{faculties} to Faculty{building},
-    Assignment{assignmentUsers} to AssignmentUser{assignment},
-    User{assignmentUsers} to AssignmentUser{user},
-    Year{users} to User{year}, 
-    Orientation{users} to User{faculty},
-    User{lectures} to Lecture{user},
+    Assignment{assignmentProfiles} to AssignmentProfile{assignment},
+    Profile{assignmentProfiles} to AssignmentProfile{user},
+    Year{users} to Profile{year},
+    Orientation{users} to Profile{faculty},
+    Profile{lectures} to Lecture{user},
     Course{notifications} to Notification{course},
-    User{notifications} to Notification{user},
-    User{assignments} to Assignment{user},
+    Profile{notifications} to Notification{user},
+    Profile{assignments} to Assignment{user},
     Course{assignments} to Assignment{course},
     Lecture{course} to Course{lectures}
 }
 
 relationship ManyToOne{
-	Course{professor} to User,
-    Course{assistant} to User,
+	Course{professor} to Profile,
+    Course{assistant} to Profile,
     Course{year} to Year
 }
 
 relationship ManyToMany {
 	Faculty{orientations} to Orientation{faculties},
-    Faculty{users} to User{faculties},
+    Faculty{users} to Profile{faculties},
     Course{orientations} to Orientation{courses},
-    Course{users} to User{courses}
+    Course{users} to Profile{courses}
 }
 
+// Set pagination options
+paginate all with pagination
+
+// Use Data Transfer Objects (DTO)
 dto * with mapstruct
-paginate * with pagination
-service * with serviceClass
-filter * 
+
+// Set service options to all except few
+service all with serviceClass
+
+// Set an angular suffix
+// angularSuffix * with mySuffix
+
+filter *
 
