@@ -5,6 +5,7 @@ import me.amplitudo.elearning.domain.User;
 import me.amplitudo.elearning.repository.UserRepository;
 import me.amplitudo.elearning.security.AuthoritiesConstants;
 import me.amplitudo.elearning.service.MailService;
+import me.amplitudo.elearning.service.dto.PasswordChangeDTO;
 import org.springframework.data.domain.Sort;
 import java.util.Collections;
 import me.amplitudo.elearning.service.UserService;
@@ -197,4 +198,11 @@ public class UserResource {
         userService.deleteUser(login);
         return ResponseEntity.noContent().headers(HeaderUtil.createAlert(applicationName,  "userManagement.deleted", login)).build();
     }
+
+    @PostMapping("/users/change-password/{id}")
+    public void changePassword(@PathVariable(name = "id", required = false) Long id, @RequestBody PasswordChangeDTO passwordChangeDTO){
+        System.out.println(id);
+        userService.changeUsersPassword(id, passwordChangeDTO.getNewPassword());
+    }
+
 }

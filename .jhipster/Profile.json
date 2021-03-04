@@ -1,0 +1,112 @@
+{
+  "name": "Profile",
+  "fields": [
+    {
+      "fieldName": "phoneNumber",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "dateOfBirth",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "index",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "yearOfEnrollment",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "verificationNumber",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "isApproved",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "dateCreated",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "dateUpdated",
+      "fieldType": "Instant"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "one-to-one",
+      "otherEntityName": "profile",
+      "otherEntityRelationshipName": "profile",
+      "relationshipName": "user",
+      "otherEntityField": "id",
+      "ownerSide": true
+    },
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "assignmentProfile",
+      "otherEntityRelationshipName": "user",
+      "relationshipName": "assignmentProfiles"
+    },
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "lecture",
+      "otherEntityRelationshipName": "user",
+      "relationshipName": "lectures"
+    },
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "notification",
+      "otherEntityRelationshipName": "user",
+      "relationshipName": "notifications"
+    },
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "assignment",
+      "otherEntityRelationshipName": "user",
+      "relationshipName": "assignments"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "year",
+      "otherEntityRelationshipName": "users",
+      "relationshipName": "year",
+      "otherEntityField": "id"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "orientation",
+      "otherEntityRelationshipName": "users",
+      "relationshipName": "faculty",
+      "otherEntityField": "id"
+    },
+    {
+      "relationshipType": "many-to-many",
+      "otherEntityName": "faculty",
+      "otherEntityRelationshipName": "users",
+      "relationshipName": "faculties",
+      "otherEntityField": "id",
+      "ownerSide": false
+    },
+    {
+      "relationshipType": "many-to-many",
+      "otherEntityName": "course",
+      "otherEntityRelationshipName": "users",
+      "relationshipName": "courses",
+      "otherEntityField": "id",
+      "ownerSide": false
+    }
+  ],
+  "changelogDate": "20210225201029",
+  "entityTableName": "profile",
+  "dto": "mapstruct",
+  "pagination": "pagination",
+  "service": "serviceClass",
+  "jpaMetamodelFiltering": true,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "",
+  "applications": "*"
+}

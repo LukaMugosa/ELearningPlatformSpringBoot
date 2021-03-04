@@ -1,0 +1,87 @@
+{
+  "name": "Course",
+  "fields": [
+    {
+      "fieldName": "name",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "dateCreated",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "dateUpdated",
+      "fieldType": "Instant"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "notification",
+      "otherEntityRelationshipName": "course",
+      "relationshipName": "notifications"
+    },
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "assignment",
+      "otherEntityRelationshipName": "course",
+      "relationshipName": "assignments"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "profile",
+      "otherEntityRelationshipName": "course",
+      "relationshipName": "professor",
+      "otherEntityField": "id"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "profile",
+      "otherEntityRelationshipName": "course",
+      "relationshipName": "assistant",
+      "otherEntityField": "id"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "year",
+      "otherEntityRelationshipName": "course",
+      "relationshipName": "year",
+      "otherEntityField": "id"
+    },
+    {
+      "relationshipType": "many-to-many",
+      "otherEntityName": "orientation",
+      "otherEntityRelationshipName": "courses",
+      "relationshipName": "orientations",
+      "otherEntityField": "id",
+      "ownerSide": true
+    },
+    {
+      "relationshipType": "many-to-many",
+      "otherEntityName": "profile",
+      "otherEntityRelationshipName": "courses",
+      "relationshipName": "users",
+      "otherEntityField": "id",
+      "ownerSide": true
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "lecture",
+      "otherEntityRelationshipName": "course",
+      "relationshipName": "lectures",
+      "otherEntityField": "id"
+    }
+  ],
+  "changelogDate": "20210225200329",
+  "entityTableName": "course",
+  "dto": "mapstruct",
+  "pagination": "pagination",
+  "service": "serviceClass",
+  "jpaMetamodelFiltering": true,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "",
+  "applications": "*"
+}

@@ -48,6 +48,36 @@ public class CacheConfiguration {
             createCache(cm, me.amplitudo.elearning.domain.User.class.getName());
             createCache(cm, me.amplitudo.elearning.domain.Authority.class.getName());
             createCache(cm, me.amplitudo.elearning.domain.User.class.getName() + ".authorities");
+            createCache(cm, me.amplitudo.elearning.domain.Faculty.class.getName());
+            createCache(cm, me.amplitudo.elearning.domain.Faculty.class.getName() + ".orientations");
+            createCache(cm, me.amplitudo.elearning.domain.Faculty.class.getName() + ".orientationFaculties");
+            createCache(cm, me.amplitudo.elearning.domain.Faculty.class.getName() + ".users");
+            createCache(cm, me.amplitudo.elearning.domain.Orientation.class.getName());
+            createCache(cm, me.amplitudo.elearning.domain.Orientation.class.getName() + ".users");
+            createCache(cm, me.amplitudo.elearning.domain.Orientation.class.getName() + ".faculties");
+            createCache(cm, me.amplitudo.elearning.domain.Orientation.class.getName() + ".courses");
+            createCache(cm, me.amplitudo.elearning.domain.Course.class.getName());
+            createCache(cm, me.amplitudo.elearning.domain.Course.class.getName() + ".notifications");
+            createCache(cm, me.amplitudo.elearning.domain.Course.class.getName() + ".assignments");
+            createCache(cm, me.amplitudo.elearning.domain.Course.class.getName() + ".orientations");
+            createCache(cm, me.amplitudo.elearning.domain.Course.class.getName() + ".users");
+            createCache(cm, me.amplitudo.elearning.domain.Year.class.getName());
+            createCache(cm, me.amplitudo.elearning.domain.Year.class.getName() + ".users");
+            createCache(cm, me.amplitudo.elearning.domain.Building.class.getName());
+            createCache(cm, me.amplitudo.elearning.domain.Building.class.getName() + ".faculties");
+            createCache(cm, me.amplitudo.elearning.domain.Notification.class.getName());
+            createCache(cm, me.amplitudo.elearning.domain.Assignment.class.getName());
+            createCache(cm, me.amplitudo.elearning.domain.Assignment.class.getName() + ".assignmentProfiles");
+            createCache(cm, me.amplitudo.elearning.domain.AssignmentProfile.class.getName());
+            createCache(cm, me.amplitudo.elearning.domain.Lecture.class.getName());
+            createCache(cm, me.amplitudo.elearning.domain.Lecture.class.getName() + ".courses");
+            createCache(cm, me.amplitudo.elearning.domain.Profile.class.getName());
+            createCache(cm, me.amplitudo.elearning.domain.Profile.class.getName() + ".assignmentProfiles");
+            createCache(cm, me.amplitudo.elearning.domain.Profile.class.getName() + ".lectures");
+            createCache(cm, me.amplitudo.elearning.domain.Profile.class.getName() + ".notifications");
+            createCache(cm, me.amplitudo.elearning.domain.Profile.class.getName() + ".assignments");
+            createCache(cm, me.amplitudo.elearning.domain.Profile.class.getName() + ".faculties");
+            createCache(cm, me.amplitudo.elearning.domain.Profile.class.getName() + ".courses");
             // jhipster-needle-ehcache-add-entry
         };
     }

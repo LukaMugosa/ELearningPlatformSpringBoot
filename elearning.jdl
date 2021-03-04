@@ -102,7 +102,7 @@ relationship ManyToOne{
 }
 
 relationship ManyToMany {
-	Faculty{orientations} to Orientation{faculties},
+	Faculty{orientationFaculties} to Orientation{faculties},
     Faculty{users} to Profile{faculties},
     Course{orientations} to Orientation{courses},
     Course{users} to Profile{courses}

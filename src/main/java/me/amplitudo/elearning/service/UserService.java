@@ -294,6 +294,16 @@ public class UserService {
         return authorityRepository.findAll().stream().map(Authority::getName).collect(Collectors.toList());
     }
 
+    public void changeUsersPassword(Long userId, String newPassword){
+
+        Optional<User> user = userRepository.findById(userId);
+        if(user.isPresent()){
+            user.get().setPassword(passwordEncoder.encode(newPassword));
+            userRepository.save(user.get());
+        }
+
+    }
+
 
     private void clearUserCaches(User user) {
         Objects.requireNonNull(cacheManager.getCache(UserRepository.USERS_BY_LOGIN_CACHE)).evict(user.getLogin());

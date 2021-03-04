@@ -14,7 +14,25 @@
     <property name="uuidType" value="varchar(36)" dbms="h2, mysql, mariadb"/>
 
     <include file="config/liquibase/changelog/00000000000000_initial_schema.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210225200129_added_entity_Faculty.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210225200229_added_entity_Orientation.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210225200329_added_entity_Course.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210225200429_added_entity_Year.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210225200529_added_entity_Building.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210225200629_added_entity_Notification.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210225200729_added_entity_Assignment.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210225200829_added_entity_AssignmentProfile.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210225200929_added_entity_Lecture.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210225201029_added_entity_Profile.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
+    <include file="config/liquibase/changelog/20210225200129_added_entity_constraints_Faculty.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210225200229_added_entity_constraints_Orientation.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210225200329_added_entity_constraints_Course.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210225200629_added_entity_constraints_Notification.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210225200729_added_entity_constraints_Assignment.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210225200829_added_entity_constraints_AssignmentProfile.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210225200929_added_entity_constraints_Lecture.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20210225201029_added_entity_constraints_Profile.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->
     <!-- jhipster-needle-liquibase-add-incremental-changelog - JHipster will add incremental liquibase changelogs here -->
 </databaseChangeLog>

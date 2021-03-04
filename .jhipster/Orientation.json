@@ -1,0 +1,60 @@
+{
+  "name": "Orientation",
+  "fields": [
+    {
+      "fieldName": "name",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "dateCreated",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "dateUpdated",
+      "fieldType": "Instant"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "one-to-many",
+      "otherEntityName": "profile",
+      "otherEntityRelationshipName": "faculty",
+      "relationshipName": "users"
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "faculty",
+      "otherEntityRelationshipName": "orientations",
+      "relationshipName": "faculty",
+      "otherEntityField": "id"
+    },
+    {
+      "relationshipType": "many-to-many",
+      "otherEntityName": "faculty",
+      "otherEntityRelationshipName": "orientationFaculties",
+      "relationshipName": "faculties",
+      "otherEntityField": "id",
+      "ownerSide": false
+    },
+    {
+      "relationshipType": "many-to-many",
+      "otherEntityName": "course",
+      "otherEntityRelationshipName": "orientations",
+      "relationshipName": "courses",
+      "otherEntityField": "id",
+      "ownerSide": false
+    }
+  ],
+  "changelogDate": "20210225200229",
+  "entityTableName": "orientation",
+  "dto": "mapstruct",
+  "pagination": "pagination",
+  "service": "serviceClass",
+  "jpaMetamodelFiltering": true,
+  "fluentMethods": true,
+  "readOnly": false,
+  "embedded": false,
+  "clientRootFolder": "",
+  "applications": "*"
+}

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.9.xsd">
+    <!--
+        Added the constraints for entity Course.
+    -->
+    <changeSet id="20210225200329-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="professor_id"
+                                 baseTableName="course"
+                                 constraintName="fk_course_professor_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="profile"/>
+
+        <addForeignKeyConstraint baseColumnNames="assistant_id"
+                                 baseTableName="course"
+                                 constraintName="fk_course_assistant_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="profile"/>
+
+        <addForeignKeyConstraint baseColumnNames="year_id"
+                                 baseTableName="course"
+                                 constraintName="fk_course_year_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="year"/>
+
+        <addForeignKeyConstraint baseColumnNames="course_id"
+                                 baseTableName="course_orientations"
+                                 constraintName="fk_course_orientations_course_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="course"/>
+
+        <addForeignKeyConstraint baseColumnNames="orientations_id"
+                                 baseTableName="course_orientations"
+                                 constraintName="fk_course_orientations_orientations_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="orientation"/>
+        
+        <addForeignKeyConstraint baseColumnNames="course_id"
+                                 baseTableName="course_users"
+                                 constraintName="fk_course_users_course_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="course"/>
+
+        <addForeignKeyConstraint baseColumnNames="users_id"
+                                 baseTableName="course_users"
+                                 constraintName="fk_course_users_users_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="profile"/>
+        
+        <addForeignKeyConstraint baseColumnNames="lectures_id"
+                                 baseTableName="course"
+                                 constraintName="fk_course_lectures_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="lecture"/>
+
+    </changeSet>
+</databaseChangeLog>
