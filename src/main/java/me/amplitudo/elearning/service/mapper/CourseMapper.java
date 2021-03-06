@@ -9,13 +9,17 @@ import org.mapstruct.*;
 /**
  * Mapper for the entity {@link Course} and its DTO {@link CourseDTO}.
  */
-@Mapper(componentModel = "spring", uses = {ProfileMapper.class, YearMapper.class, OrientationMapper.class, LectureMapper.class})
+@Mapper(componentModel = "spring", uses = {UserMapper.class, YearMapper.class, OrientationMapper.class, ProfileMapper.class})
 public interface CourseMapper extends EntityMapper<CourseDTO, Course> {
 
     @Mapping(source = "professor.id", target = "professorId")
+    @Mapping(source = "professor.firstName", target = "professorFirstName")
+    @Mapping(source = "professor.lastName", target = "professorLastName")
     @Mapping(source = "assistant.id", target = "assistantId")
+    @Mapping(source = "assistant.firstName", target = "assistantFirstName")
+    @Mapping(source = "assistant.lastName", target = "assistantLastName")
     @Mapping(source = "year.id", target = "yearId")
-    @Mapping(source = "lectures.id", target = "lecturesId")
+    @Mapping(source = "year.name", target = "yearName")
     CourseDTO toDto(Course course);
 
     @Mapping(target = "notifications", ignore = true)
@@ -27,7 +31,8 @@ public interface CourseMapper extends EntityMapper<CourseDTO, Course> {
     @Mapping(source = "yearId", target = "year")
     @Mapping(target = "removeOrientations", ignore = true)
     @Mapping(target = "removeUsers", ignore = true)
-    @Mapping(source = "lecturesId", target = "lectures")
+    @Mapping(target = "lectures", ignore = true)
+    @Mapping(target = "removeLectures", ignore = true)
     Course toEntity(CourseDTO courseDTO);
 
     default Course fromId(Long id) {

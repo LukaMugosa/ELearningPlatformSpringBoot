@@ -9,14 +9,14 @@ import org.mapstruct.*;
 /**
  * Mapper for the entity {@link Lecture} and its DTO {@link LectureDTO}.
  */
-@Mapper(componentModel = "spring", uses = {ProfileMapper.class})
+@Mapper(componentModel = "spring", uses = {CourseMapper.class, ProfileMapper.class})
 public interface LectureMapper extends EntityMapper<LectureDTO, Lecture> {
 
+    @Mapping(source = "course.id", target = "courseId")
     @Mapping(source = "user.id", target = "userId")
     LectureDTO toDto(Lecture lecture);
 
-    @Mapping(target = "courses", ignore = true)
-    @Mapping(target = "removeCourse", ignore = true)
+    @Mapping(source = "courseId", target = "course")
     @Mapping(source = "userId", target = "user")
     Lecture toEntity(LectureDTO lectureDTO);
 

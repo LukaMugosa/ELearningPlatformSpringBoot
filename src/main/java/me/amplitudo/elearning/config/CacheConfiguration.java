@@ -78,6 +78,7 @@ public class CacheConfiguration {
             createCache(cm, me.amplitudo.elearning.domain.Profile.class.getName() + ".assignments");
             createCache(cm, me.amplitudo.elearning.domain.Profile.class.getName() + ".faculties");
             createCache(cm, me.amplitudo.elearning.domain.Profile.class.getName() + ".courses");
+            createCache(cm, me.amplitudo.elearning.domain.Course.class.getName() + ".lectures");
             // jhipster-needle-ehcache-add-entry
         };
     }

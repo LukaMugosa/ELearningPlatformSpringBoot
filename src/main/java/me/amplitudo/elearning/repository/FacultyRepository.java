@@ -33,4 +33,5 @@ public interface FacultyRepository extends JpaRepository<Faculty, Long>, JpaSpec
 
     Integer countAllByNameAndIdNot(String name, Long id);
 
+    List<Faculty> findAllByBuildingId(Long id);
 }

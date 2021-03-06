@@ -9,8 +9,6 @@ import javax.validation.constraints.*;
 
 import java.io.Serializable;
 import java.time.Instant;
-import java.util.HashSet;
-import java.util.Set;
 
 /**
  * A Lecture.
@@ -48,9 +46,9 @@ public class Lecture implements Serializable {
     @Column(name = "date_updated")
     private Instant dateUpdated;
 
-    @OneToMany(mappedBy = "lectures")
-    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-    private Set<Course> courses = new HashSet<>();
+    @ManyToOne
+    @JsonIgnoreProperties(value = "lectures", allowSetters = true)
+    private Course course;
 
     @ManyToOne
     @JsonIgnoreProperties(value = "lectures", allowSetters = true)
@@ -143,29 +141,17 @@ public class Lecture implements Serializable {
         this.dateUpdated = dateUpdated;
     }
 
-    public Set<Course> getCourses() {
-        return courses;
+    public Course getCourse() {
+        return course;
     }
 
-    public Lecture courses(Set<Course> courses) {
-        this.courses = courses;
+    public Lecture course(Course course) {
+        this.course = course;
         return this;
     }
 
-    public Lecture addCourse(Course course) {
-        this.courses.add(course);
-        course.setLectures(this);
-        return this;
-    }
-
-    public Lecture removeCourse(Course course) {
-        this.courses.remove(course);
-        course.setLectures(null);
-        return this;
-    }
-
-    public void setCourses(Set<Course> courses) {
-        this.courses = courses;
+    public void setCourse(Course course) {
+        this.course = course;
     }
 
     public Profile getUser() {

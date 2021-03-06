@@ -37,7 +37,7 @@
   "relationships": [
     {
       "relationshipType": "one-to-one",
-      "otherEntityName": "profile",
+      "otherEntityName": "user",
       "otherEntityRelationshipName": "profile",
       "relationshipName": "user",
       "otherEntityField": "id",

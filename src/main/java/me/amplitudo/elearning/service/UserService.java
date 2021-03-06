@@ -117,7 +117,7 @@ public class UserService {
         // new user gets registration key
         newUser.setActivationKey(RandomUtil.generateActivationKey());
         Set<Authority> authorities = new HashSet<>();
-        authorityRepository.findById(AuthoritiesConstants.USER).ifPresent(authorities::add);
+        authorityRepository.findById(AuthoritiesConstants.GUEST).ifPresent(authorities::add);
         newUser.setAuthorities(authorities);
         userRepository.save(newUser);
         this.clearUserCaches(newUser);
@@ -310,5 +310,16 @@ public class UserService {
         if (user.getEmail() != null) {
             Objects.requireNonNull(cacheManager.getCache(UserRepository.USERS_BY_EMAIL_CACHE)).evict(user.getEmail());
         }
+    }
+
+    public Page<UserDTO> findAllProfessorsAndAssistants(Pageable pageable) {
+
+        return userRepository
+            .findAllByAuthoritiesNameOrAuthoritiesName(
+                pageable,
+                AuthoritiesConstants.PROFESSOR,
+                AuthoritiesConstants.ASSISTANT)
+            .map(UserDTO::new);
+
     }
 }

@@ -200,9 +200,23 @@ public class UserResource {
     }
 
     @PostMapping("/users/change-password/{id}")
+    @PreAuthorize("hasAuthority(\"" + AuthoritiesConstants.ADMIN + "\")")
     public void changePassword(@PathVariable(name = "id", required = false) Long id, @RequestBody PasswordChangeDTO passwordChangeDTO){
         System.out.println(id);
         userService.changeUsersPassword(id, passwordChangeDTO.getNewPassword());
+    }
+
+    @GetMapping("/users/professors-and-assistants")
+    @PreAuthorize("hasAuthority(\"" + AuthoritiesConstants.ADMIN + "\")")
+    public ResponseEntity<List<UserDTO>> getProfessorsAndAssistants(Pageable pageable){
+
+        final Page<UserDTO> page = userService.findAllProfessorsAndAssistants(pageable);
+
+        HttpHeaders headers = PaginationUtil
+            .generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
+
+        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+
     }
 
 }

@@ -32,9 +32,9 @@
   ],
   "relationships": [
     {
-      "relationshipType": "one-to-many",
+      "relationshipType": "many-to-one",
       "otherEntityName": "course",
-      "otherEntityRelationshipName": "lectures",
+      "otherEntityRelationshipName": "lecture",
       "relationshipName": "course"
     },
     {

@@ -23,13 +23,17 @@ public class CourseDTO implements Serializable {
 
     private Long professorId;
 
+    private String professorFirstName;
+    private String professorLastName;
+
     private Long assistantId;
 
-    private Long yearId;
-    private Set<OrientationDTO> orientations = new HashSet<>();
-    private Set<ProfileDTO> users = new HashSet<>();
+    private String assistantFirstName;
+    private String assistantLastName;
 
-    private Long lecturesId;
+
+    private Long yearId;
+    private String yearName;
 
     public Long getId() {
         return id;
@@ -59,6 +63,14 @@ public class CourseDTO implements Serializable {
         return dateUpdated;
     }
 
+    public String getYearName() {
+        return yearName;
+    }
+
+    public void setYearName(String yearName) {
+        this.yearName = yearName;
+    }
+
     public void setDateUpdated(Instant dateUpdated) {
         this.dateUpdated = dateUpdated;
     }
@@ -67,16 +79,16 @@ public class CourseDTO implements Serializable {
         return professorId;
     }
 
-    public void setProfessorId(Long profileId) {
-        this.professorId = profileId;
+    public void setProfessorId(Long userId) {
+        this.professorId = userId;
     }
 
     public Long getAssistantId() {
         return assistantId;
     }
 
-    public void setAssistantId(Long profileId) {
-        this.assistantId = profileId;
+    public void setAssistantId(Long userId) {
+        this.assistantId = userId;
     }
 
     public Long getYearId() {
@@ -87,28 +99,36 @@ public class CourseDTO implements Serializable {
         this.yearId = yearId;
     }
 
-    public Set<OrientationDTO> getOrientations() {
-        return orientations;
+    public String getProfessorFirstName() {
+        return professorFirstName;
     }
 
-    public void setOrientations(Set<OrientationDTO> orientations) {
-        this.orientations = orientations;
+    public void setProfessorFirstName(String professorFirstName) {
+        this.professorFirstName = professorFirstName;
     }
 
-    public Set<ProfileDTO> getUsers() {
-        return users;
+    public String getProfessorLastName() {
+        return professorLastName;
     }
 
-    public void setUsers(Set<ProfileDTO> profiles) {
-        this.users = profiles;
+    public void setProfessorLastName(String professorLastName) {
+        this.professorLastName = professorLastName;
     }
 
-    public Long getLecturesId() {
-        return lecturesId;
+    public String getAssistantFirstName() {
+        return assistantFirstName;
     }
 
-    public void setLecturesId(Long lectureId) {
-        this.lecturesId = lectureId;
+    public void setAssistantFirstName(String assistantFirstName) {
+        this.assistantFirstName = assistantFirstName;
+    }
+
+    public String getAssistantLastName() {
+        return assistantLastName;
+    }
+
+    public void setAssistantLastName(String assistantLastName) {
+        this.assistantLastName = assistantLastName;
     }
 
     @Override
@@ -139,9 +159,6 @@ public class CourseDTO implements Serializable {
             ", professorId=" + getProfessorId() +
             ", assistantId=" + getAssistantId() +
             ", yearId=" + getYearId() +
-            ", orientations='" + getOrientations() + "'" +
-            ", users='" + getUsers() + "'" +
-            ", lecturesId=" + getLecturesId() +
             "}";
     }
 }

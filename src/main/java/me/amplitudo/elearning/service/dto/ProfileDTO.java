@@ -110,8 +110,8 @@ public class ProfileDTO implements Serializable {
         return userId;
     }
 
-    public void setUserId(Long profileId) {
-        this.userId = profileId;
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
     public Long getYearId() {

@@ -12,7 +12,7 @@
                                  baseTableName="profile"
                                  constraintName="fk_profile_user_id"
                                  referencedColumnNames="id"
-                                 referencedTableName="profile"/>
+                                 referencedTableName="jhi_user"/>
 
         <addForeignKeyConstraint baseColumnNames="year_id"
                                  baseTableName="profile"

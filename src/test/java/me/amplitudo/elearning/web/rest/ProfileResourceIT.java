@@ -2,7 +2,7 @@ package me.amplitudo.elearning.web.rest;
 
 import me.amplitudo.elearning.ElearningApp;
 import me.amplitudo.elearning.domain.Profile;
-import me.amplitudo.elearning.domain.Profile;
+import me.amplitudo.elearning.domain.User;
 import me.amplitudo.elearning.domain.AssignmentProfile;
 import me.amplitudo.elearning.domain.Lecture;
 import me.amplitudo.elearning.domain.Notification;
@@ -876,7 +876,7 @@ public class ProfileResourceIT {
     public void getAllProfilesByUserIsEqualToSomething() throws Exception {
         // Initialize the database
         profileRepository.saveAndFlush(profile);
-        Profile user = ProfileResourceIT.createEntity(em);
+        User user = UserResourceIT.createEntity(em);
         em.persist(user);
         em.flush();
         profile.setUser(user);

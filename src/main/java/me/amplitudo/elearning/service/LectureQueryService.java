@@ -111,7 +111,7 @@ public class LectureQueryService extends QueryService<Lecture> {
             }
             if (criteria.getCourseId() != null) {
                 specification = specification.and(buildSpecification(criteria.getCourseId(),
-                    root -> root.join(Lecture_.courses, JoinType.LEFT).get(Course_.id)));
+                    root -> root.join(Lecture_.course, JoinType.LEFT).get(Course_.id)));
             }
             if (criteria.getUserId() != null) {
                 specification = specification.and(buildSpecification(criteria.getUserId(),

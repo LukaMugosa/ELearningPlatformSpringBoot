@@ -203,6 +203,18 @@ public class ExceptionTranslator implements ProblemHandling, SecurityAdviceTrait
         return create(ex, problem, request);
     }
 
+    @ExceptionHandler
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public ResponseEntity<Problem> handleEntityNotFoundException(EntityNotFoundException ex, NativeWebRequest request){
+
+        Problem problem = Problem.builder()
+            .withStatus(Status.NOT_FOUND)
+            .with(MESSAGE_KEY, ex.getMessage())
+            .build();
+
+        return create(ex, problem, request);
+    }
+
     private boolean containsPackageName(String message) {
 
         // This list is for sure not complete

@@ -12,13 +12,13 @@
                                  baseTableName="course"
                                  constraintName="fk_course_professor_id"
                                  referencedColumnNames="id"
-                                 referencedTableName="profile"/>
+                                 referencedTableName="jhi_user"/>
 
         <addForeignKeyConstraint baseColumnNames="assistant_id"
                                  baseTableName="course"
                                  constraintName="fk_course_assistant_id"
                                  referencedColumnNames="id"
-                                 referencedTableName="profile"/>
+                                 referencedTableName="jhi_user"/>
 
         <addForeignKeyConstraint baseColumnNames="year_id"
                                  baseTableName="course"
@@ -50,11 +50,5 @@
                                  referencedColumnNames="id"
                                  referencedTableName="profile"/>
         
-        <addForeignKeyConstraint baseColumnNames="lectures_id"
-                                 baseTableName="course"
-                                 constraintName="fk_course_lectures_id"
-                                 referencedColumnNames="id"
-                                 referencedTableName="lecture"/>
-
     </changeSet>
 </databaseChangeLog>

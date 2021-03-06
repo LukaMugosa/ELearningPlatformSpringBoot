@@ -720,7 +720,7 @@ public class LectureResourceIT {
         Course course = CourseResourceIT.createEntity(em);
         em.persist(course);
         em.flush();
-        lecture.addCourse(course);
+        lecture.setCourse(course);
         lectureRepository.saveAndFlush(lecture);
         Long courseId = course.getId();
 

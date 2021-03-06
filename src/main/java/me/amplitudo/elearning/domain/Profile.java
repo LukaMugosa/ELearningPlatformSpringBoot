@@ -53,7 +53,7 @@ public class Profile implements Serializable {
 
     @OneToOne
     @JoinColumn(unique = true)
-    private Profile user;
+    private User user;
 
     @OneToMany(mappedBy = "user")
     @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
@@ -202,17 +202,17 @@ public class Profile implements Serializable {
         this.dateUpdated = dateUpdated;
     }
 
-    public Profile getUser() {
+    public User getUser() {
         return user;
     }
 
-    public Profile user(Profile profile) {
-        this.user = profile;
+    public Profile user(User user) {
+        this.user = user;
         return this;
     }
 
-    public void setUser(Profile profile) {
-        this.user = profile;
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public Set<AssignmentProfile> getAssignmentProfiles() {

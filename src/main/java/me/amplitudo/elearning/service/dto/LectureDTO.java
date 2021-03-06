@@ -28,6 +28,8 @@ public class LectureDTO implements Serializable {
     private Instant dateUpdated;
 
 
+    private Long courseId;
+
     private Long userId;
     
     public Long getId() {
@@ -86,6 +88,14 @@ public class LectureDTO implements Serializable {
         this.dateUpdated = dateUpdated;
     }
 
+    public Long getCourseId() {
+        return courseId;
+    }
+
+    public void setCourseId(Long courseId) {
+        this.courseId = courseId;
+    }
+
     public Long getUserId() {
         return userId;
     }
@@ -122,6 +132,7 @@ public class LectureDTO implements Serializable {
             ", fileTypeIconPath='" + getFileTypeIconPath() + "'" +
             ", dateCreated='" + getDateCreated() + "'" +
             ", dateUpdated='" + getDateUpdated() + "'" +
+            ", courseId=" + getCourseId() +
             ", userId=" + getUserId() +
             "}";
     }

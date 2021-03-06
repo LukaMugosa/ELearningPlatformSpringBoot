@@ -30,15 +30,13 @@
     },
     {
       "relationshipType": "many-to-one",
-      "otherEntityName": "profile",
-      "otherEntityRelationshipName": "course",
+      "otherEntityName": "user",
       "relationshipName": "professor",
       "otherEntityField": "id"
     },
     {
       "relationshipType": "many-to-one",
-      "otherEntityName": "profile",
-      "otherEntityRelationshipName": "course",
+      "otherEntityName": "user",
       "relationshipName": "assistant",
       "otherEntityField": "id"
     },
@@ -66,7 +64,7 @@
       "ownerSide": true
     },
     {
-      "relationshipType": "many-to-one",
+      "relationshipType": "one-to-many",
       "otherEntityName": "lecture",
       "otherEntityRelationshipName": "course",
       "relationshipName": "lectures",

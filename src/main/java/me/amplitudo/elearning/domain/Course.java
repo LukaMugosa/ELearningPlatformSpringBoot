@@ -46,11 +46,11 @@ public class Course implements Serializable {
 
     @ManyToOne
     @JsonIgnoreProperties(value = "courses", allowSetters = true)
-    private Profile professor;
+    private User professor;
 
     @ManyToOne
     @JsonIgnoreProperties(value = "courses", allowSetters = true)
-    private Profile assistant;
+    private User assistant;
 
     @ManyToOne
     @JsonIgnoreProperties(value = "courses", allowSetters = true)
@@ -70,9 +70,9 @@ public class Course implements Serializable {
                inverseJoinColumns = @JoinColumn(name = "users_id", referencedColumnName = "id"))
     private Set<Profile> users = new HashSet<>();
 
-    @ManyToOne
-    @JsonIgnoreProperties(value = "courses", allowSetters = true)
-    private Lecture lectures;
+    @OneToMany(mappedBy = "course")
+    @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+    private Set<Lecture> lectures = new HashSet<>();
 
     // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
@@ -172,30 +172,30 @@ public class Course implements Serializable {
         this.assignments = assignments;
     }
 
-    public Profile getProfessor() {
+    public User getProfessor() {
         return professor;
     }
 
-    public Course professor(Profile profile) {
-        this.professor = profile;
+    public Course professor(User user) {
+        this.professor = user;
         return this;
     }
 
-    public void setProfessor(Profile profile) {
-        this.professor = profile;
+    public void setProfessor(User user) {
+        this.professor = user;
     }
 
-    public Profile getAssistant() {
+    public User getAssistant() {
         return assistant;
     }
 
-    public Course assistant(Profile profile) {
-        this.assistant = profile;
+    public Course assistant(User user) {
+        this.assistant = user;
         return this;
     }
 
-    public void setAssistant(Profile profile) {
-        this.assistant = profile;
+    public void setAssistant(User user) {
+        this.assistant = user;
     }
 
     public Year getYear() {
@@ -261,17 +261,29 @@ public class Course implements Serializable {
         this.users = profiles;
     }
 
-    public Lecture getLectures() {
+    public Set<Lecture> getLectures() {
         return lectures;
     }
 
-    public Course lectures(Lecture lecture) {
-        this.lectures = lecture;
+    public Course lectures(Set<Lecture> lectures) {
+        this.lectures = lectures;
         return this;
     }
 
-    public void setLectures(Lecture lecture) {
-        this.lectures = lecture;
+    public Course addLectures(Lecture lecture) {
+        this.lectures.add(lecture);
+        lecture.setCourse(this);
+        return this;
+    }
+
+    public Course removeLectures(Lecture lecture) {
+        this.lectures.remove(lecture);
+        lecture.setCourse(null);
+        return this;
+    }
+
+    public void setLectures(Set<Lecture> lectures) {
+        this.lectures = lectures;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 

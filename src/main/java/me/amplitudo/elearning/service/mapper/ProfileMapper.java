@@ -9,7 +9,7 @@ import org.mapstruct.*;
 /**
  * Mapper for the entity {@link Profile} and its DTO {@link ProfileDTO}.
  */
-@Mapper(componentModel = "spring", uses = {YearMapper.class, OrientationMapper.class})
+@Mapper(componentModel = "spring", uses = {UserMapper.class, YearMapper.class, OrientationMapper.class})
 public interface ProfileMapper extends EntityMapper<ProfileDTO, Profile> {
 
     @Mapping(source = "user.id", target = "userId")

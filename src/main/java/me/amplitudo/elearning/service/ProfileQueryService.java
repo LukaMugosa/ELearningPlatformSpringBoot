@@ -117,7 +117,7 @@ public class ProfileQueryService extends QueryService<Profile> {
             }
             if (criteria.getUserId() != null) {
                 specification = specification.and(buildSpecification(criteria.getUserId(),
-                    root -> root.join(Profile_.user, JoinType.LEFT).get(Profile_.id)));
+                    root -> root.join(Profile_.user, JoinType.LEFT).get(User_.id)));
             }
             if (criteria.getAssignmentProfilesId() != null) {
                 specification = specification.and(buildSpecification(criteria.getAssignmentProfilesId(),

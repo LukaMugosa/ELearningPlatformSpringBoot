@@ -34,6 +34,9 @@
             <column name="date_updated" type="datetime">
                 <constraints nullable="true" />
             </column>
+            <column name="course_id" type="bigint">
+                <constraints nullable="true" />
+            </column>
             <column name="user_id" type="bigint">
                 <constraints nullable="true" />
             </column>

@@ -4,9 +4,10 @@ import me.amplitudo.elearning.ElearningApp;
 import me.amplitudo.elearning.domain.Course;
 import me.amplitudo.elearning.domain.Notification;
 import me.amplitudo.elearning.domain.Assignment;
-import me.amplitudo.elearning.domain.Profile;
+import me.amplitudo.elearning.domain.User;
 import me.amplitudo.elearning.domain.Year;
 import me.amplitudo.elearning.domain.Orientation;
+import me.amplitudo.elearning.domain.Profile;
 import me.amplitudo.elearning.domain.Lecture;
 import me.amplitudo.elearning.repository.CourseRepository;
 import me.amplitudo.elearning.service.CourseService;
@@ -477,7 +478,7 @@ public class CourseResourceIT {
     public void getAllCoursesByProfessorIsEqualToSomething() throws Exception {
         // Initialize the database
         courseRepository.saveAndFlush(course);
-        Profile professor = ProfileResourceIT.createEntity(em);
+        User professor = UserResourceIT.createEntity(em);
         em.persist(professor);
         em.flush();
         course.setProfessor(professor);
@@ -497,7 +498,7 @@ public class CourseResourceIT {
     public void getAllCoursesByAssistantIsEqualToSomething() throws Exception {
         // Initialize the database
         courseRepository.saveAndFlush(course);
-        Profile assistant = ProfileResourceIT.createEntity(em);
+        User assistant = UserResourceIT.createEntity(em);
         em.persist(assistant);
         em.flush();
         course.setAssistant(assistant);
@@ -580,7 +581,7 @@ public class CourseResourceIT {
         Lecture lectures = LectureResourceIT.createEntity(em);
         em.persist(lectures);
         em.flush();
-        course.setLectures(lectures);
+        course.addLectures(lectures);
         courseRepository.saveAndFlush(course);
         Long lecturesId = lectures.getId();
 

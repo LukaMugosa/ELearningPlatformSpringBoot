@@ -17,6 +17,12 @@ import java.util.Optional;
 @Repository
 public interface CourseRepository extends JpaRepository<Course, Long>, JpaSpecificationExecutor<Course> {
 
+    @Query("select course from Course course where course.professor.login = ?#{principal.username}")
+    List<Course> findByProfessorIsCurrentUser();
+
+    @Query("select course from Course course where course.assistant.login = ?#{principal.username}")
+    List<Course> findByAssistantIsCurrentUser();
+
     @Query(value = "select distinct course from Course course left join fetch course.orientations left join fetch course.users",
         countQuery = "select count(distinct course) from Course course")
     Page<Course> findAllWithEagerRelationships(Pageable pageable);
