@@ -1,9 +1,11 @@
 package me.amplitudo.elearning.service;
 
 import me.amplitudo.elearning.domain.Orientation;
+import me.amplitudo.elearning.repository.CourseRepository;
 import me.amplitudo.elearning.repository.OrientationRepository;
 import me.amplitudo.elearning.service.dto.OrientationDTO;
 import me.amplitudo.elearning.service.mapper.OrientationMapper;
+import me.amplitudo.elearning.web.rest.errors.EntityNotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -27,9 +29,14 @@ public class OrientationService {
 
     private final OrientationMapper orientationMapper;
 
-    public OrientationService(OrientationRepository orientationRepository, OrientationMapper orientationMapper) {
+    private final CourseRepository courseRepository;
+
+    public OrientationService(OrientationRepository orientationRepository,
+                              OrientationMapper orientationMapper,
+                              CourseRepository courseRepository) {
         this.orientationRepository = orientationRepository;
         this.orientationMapper = orientationMapper;
+        this.courseRepository = courseRepository;
     }
 
     /**
@@ -80,5 +87,17 @@ public class OrientationService {
     public void delete(Long id) {
         log.debug("Request to delete Orientation : {}", id);
         orientationRepository.deleteById(id);
+    }
+
+    public Page<OrientationDTO> findAllByCourse(Pageable pageable, Long courseId) {
+
+        if(!courseRepository.existsById(courseId)){
+            throw new EntityNotFoundException(
+                "Course with id " + courseId + " does not exist."
+            );
+        }
+
+        return orientationRepository.findAllByCoursesId(pageable, courseId)
+            .map(orientationMapper::toDto);
     }
 }

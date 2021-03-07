@@ -32,4 +32,10 @@ public interface CourseRepository extends JpaRepository<Course, Long>, JpaSpecif
 
     @Query("select course from Course course left join fetch course.orientations left join fetch course.users where course.id =:id")
     Optional<Course> findOneWithEagerRelationships(@Param("id") Long id);
+
+    Integer countAllByName(String name);
+
+    Integer countAllByNameAndIdNot(String name, Long id);
+
+    boolean existsById(Long id);
 }

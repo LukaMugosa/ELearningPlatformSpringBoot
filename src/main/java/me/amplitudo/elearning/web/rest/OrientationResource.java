@@ -141,4 +141,13 @@ public class OrientationResource {
         orientationService.delete(id);
         return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString())).build();
     }
+
+    @GetMapping("/orientations-by-course-id/{id}")
+    public ResponseEntity<List<OrientationDTO>> getOrientationsByCourseId(@PathVariable Long id, Pageable pageable){
+        Page<OrientationDTO> page = orientationService.findAllByCourse(pageable, id);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
+        return ResponseEntity.ok()
+            .headers(headers)
+            .body(page.getContent());
+    }
 }
