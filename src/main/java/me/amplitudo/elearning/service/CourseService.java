@@ -1,12 +1,15 @@
 package me.amplitudo.elearning.service;
 
 import me.amplitudo.elearning.domain.Course;
+import me.amplitudo.elearning.domain.Orientation;
 import me.amplitudo.elearning.domain.User;
 import me.amplitudo.elearning.domain.Year;
 import me.amplitudo.elearning.repository.CourseRepository;
+import me.amplitudo.elearning.repository.OrientationRepository;
 import me.amplitudo.elearning.repository.UserRepository;
 import me.amplitudo.elearning.repository.YearRepository;
 import me.amplitudo.elearning.service.dto.CourseDTO;
+import me.amplitudo.elearning.service.dto.CourseOrientationDTO;
 import me.amplitudo.elearning.service.mapper.CourseMapper;
 import me.amplitudo.elearning.web.rest.errors.BadActionException;
 import me.amplitudo.elearning.web.rest.errors.EntityNotFoundException;
@@ -38,13 +41,17 @@ public class CourseService {
     private final UserRepository userRepository;
     private final YearRepository yearRepository;
 
+    private final OrientationRepository orientationRepository;
+
     public CourseService(CourseRepository courseRepository,
                          CourseMapper courseMapper,
                          UserRepository userRepository,
+                         OrientationRepository orientationRepository,
                          YearRepository yearRepository) {
         this.courseRepository = courseRepository;
         this.courseMapper = courseMapper;
         this.userRepository = userRepository;
+        this.orientationRepository = orientationRepository;
         this.yearRepository = yearRepository;
     }
 
@@ -151,4 +158,30 @@ public class CourseService {
         }
         courseRepository.deleteById(id);
     }
+
+    public CourseDTO addOrientationToCourse(CourseOrientationDTO courseOrientationDTO){
+
+        Course course = courseRepository.findById(courseOrientationDTO.getCourseId())
+            .orElseThrow(() -> new EntityNotFoundException(
+                "Course with id " + courseOrientationDTO.getCourseId() + " does not exist."
+            ));
+
+        Orientation orientation = orientationRepository.findById(courseOrientationDTO.getOrientationId())
+            .orElseThrow(() -> new EntityNotFoundException(
+                "Orientation with id " + courseOrientationDTO.getOrientationId() + " does not exist."
+            ));
+
+        if(courseRepository.countAllByOrientationsIdAndCourseId(courseOrientationDTO.getOrientationId(), courseOrientationDTO.getCourseId()) > 0){
+            throw new BadActionException(
+                  ExceptionErrors.COURSE_ORIENTATION_EXISTS.getErrorCode(),
+                  ExceptionErrors.COURSE_ORIENTATION_EXISTS.getErrorDescription()
+            );
+        }
+
+        course.addOrientations(orientation);
+
+        return courseMapper.toDto(course);
+
+    }
+
 }

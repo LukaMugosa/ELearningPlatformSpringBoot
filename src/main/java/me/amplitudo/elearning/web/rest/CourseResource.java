@@ -1,6 +1,7 @@
 package me.amplitudo.elearning.web.rest;
 
 import me.amplitudo.elearning.service.CourseService;
+import me.amplitudo.elearning.service.dto.CourseOrientationDTO;
 import me.amplitudo.elearning.web.rest.errors.BadRequestAlertException;
 import me.amplitudo.elearning.service.dto.CourseDTO;
 import me.amplitudo.elearning.service.dto.CourseCriteria;
@@ -141,4 +142,13 @@ public class CourseResource {
         courseService.delete(id);
         return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString())).build();
     }
+
+    @PostMapping("/courses/add-orientation")
+    public ResponseEntity<CourseDTO> addOrientationToCourse(@RequestBody CourseOrientationDTO courseOrientationDTO) throws URISyntaxException {
+        CourseDTO courseDto =  courseService.addOrientationToCourse(courseOrientationDTO);
+        return ResponseEntity.created(new URI("/api/courses/" + courseDto.getId()))
+            .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, courseDto.getId().toString()))
+            .body(courseDto);
+    }
+
 }

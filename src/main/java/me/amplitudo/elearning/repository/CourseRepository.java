@@ -38,4 +38,9 @@ public interface CourseRepository extends JpaRepository<Course, Long>, JpaSpecif
     Integer countAllByNameAndIdNot(String name, Long id);
 
     boolean existsById(Long id);
+
+    @Query(value = "select count(*) from course_orientations co where co.orientations_id = ?1 and co.course_id = ?2",
+        nativeQuery = true)
+    Integer countAllByOrientationsIdAndCourseId(Long orientationId, Long courseId);
+
 }
