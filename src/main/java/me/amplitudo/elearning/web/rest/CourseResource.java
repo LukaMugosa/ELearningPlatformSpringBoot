@@ -151,4 +151,13 @@ public class CourseResource {
             .body(courseDto);
     }
 
+    @DeleteMapping("/courses/remove-orientation")
+    public ResponseEntity<Void> removeCourseFromOrientation(@RequestBody CourseOrientationDTO courseOrientationDTO){
+        log.debug("REST for removing orientation from course.");
+        courseService.removeCourseFromOrientation(courseOrientationDTO);
+        return ResponseEntity
+            .noContent()
+            .headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, courseOrientationDTO.getCourseId().toString())).build();
+    }
+
 }

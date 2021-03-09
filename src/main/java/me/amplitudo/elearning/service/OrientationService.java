@@ -1,11 +1,15 @@
 package me.amplitudo.elearning.service;
 
+import me.amplitudo.elearning.domain.Faculty;
 import me.amplitudo.elearning.domain.Orientation;
 import me.amplitudo.elearning.repository.CourseRepository;
+import me.amplitudo.elearning.repository.FacultyRepository;
 import me.amplitudo.elearning.repository.OrientationRepository;
 import me.amplitudo.elearning.service.dto.OrientationDTO;
 import me.amplitudo.elearning.service.mapper.OrientationMapper;
+import me.amplitudo.elearning.web.rest.errors.BadActionException;
 import me.amplitudo.elearning.web.rest.errors.EntityNotFoundException;
+import me.amplitudo.elearning.web.rest.errors.ExceptionErrors;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -14,6 +18,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.Instant;
 import java.util.Optional;
 
 /**
@@ -31,12 +36,16 @@ public class OrientationService {
 
     private final CourseRepository courseRepository;
 
+    private final FacultyRepository facultyRepository;
+
     public OrientationService(OrientationRepository orientationRepository,
                               OrientationMapper orientationMapper,
+                              FacultyRepository facultyRepository,
                               CourseRepository courseRepository) {
         this.orientationRepository = orientationRepository;
         this.orientationMapper = orientationMapper;
         this.courseRepository = courseRepository;
+        this.facultyRepository = facultyRepository;
     }
 
     /**
@@ -47,7 +56,30 @@ public class OrientationService {
      */
     public OrientationDTO save(OrientationDTO orientationDTO) {
         log.debug("Request to save Orientation : {}", orientationDTO);
+
+        if(
+            orientationDTO.getId() == null && orientationRepository.existsByName(orientationDTO.getName()) ||
+            orientationDTO.getId() != null && orientationRepository.existsByNameAndIdNot(orientationDTO.getName(), orientationDTO.getId())
+        ){
+            throw new BadActionException(
+                ExceptionErrors.ORIENTATION_EXISTS.getErrorCode(),
+                ExceptionErrors.ORIENTATION_EXISTS.getErrorDescription()
+            );
+        }
+
+        Faculty faculty = facultyRepository.findById(orientationDTO.getFacultyId())
+            .orElseThrow(() -> new EntityNotFoundException(
+                "Faculty with id: " + orientationDTO.getFacultyId() + " does not exist."
+            ));
+
         Orientation orientation = orientationMapper.toEntity(orientationDTO);
+
+        if(orientation.getId() == null){
+            orientation.setDateCreated(Instant.now());
+        }else{
+            orientation.setDateUpdated(Instant.now());
+        }
+
         orientation = orientationRepository.save(orientation);
         return orientationMapper.toDto(orientation);
     }
@@ -86,6 +118,13 @@ public class OrientationService {
      */
     public void delete(Long id) {
         log.debug("Request to delete Orientation : {}", id);
+
+        if(!orientationRepository.existsById(id)){
+            throw new EntityNotFoundException(
+                "Orientation with id: " + id + "does not exist."
+            );
+        }
+
         orientationRepository.deleteById(id);
     }
 

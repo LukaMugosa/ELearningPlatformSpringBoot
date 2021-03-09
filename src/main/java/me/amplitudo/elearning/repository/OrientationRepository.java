@@ -22,4 +22,10 @@ public interface OrientationRepository extends JpaRepository<Orientation, Long>,
 //        "where co.course_id = :courseId"
 //        , nativeQuery = true)
     Page<Orientation> findAllByCoursesId(Pageable pageable, @Param("courseId") Long courseId);
+
+    boolean existsById(Long id);
+    boolean existsByName(String name);
+
+    boolean existsByNameAndIdNot(String name, Long id);
+
 }

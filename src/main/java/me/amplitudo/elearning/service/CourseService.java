@@ -184,4 +184,32 @@ public class CourseService {
 
     }
 
+    public void removeCourseFromOrientation(CourseOrientationDTO courseOrientationDTO) {
+
+        Course course = courseRepository.findById(courseOrientationDTO.getCourseId())
+            .orElseThrow(() -> new EntityNotFoundException(
+                "Course with id " + courseOrientationDTO.getCourseId() + " does not exist."
+            ));
+
+        Orientation orientation = orientationRepository.findById(courseOrientationDTO.getOrientationId())
+            .orElseThrow(() -> new EntityNotFoundException(
+                "Orientation with id " + courseOrientationDTO.getOrientationId() + " does not exist."
+            ));
+
+        if(
+            courseRepository.countAllByOrientationsIdAndCourseId(
+                courseOrientationDTO.getOrientationId(), courseOrientationDTO.getCourseId()
+            ).equals(0)
+        ){
+            throw new EntityNotFoundException(
+                "Relationship between course with id: " + courseOrientationDTO.getCourseId() +
+                "and orientation with id: " + courseOrientationDTO.getOrientationId() + "does not exist."
+            );
+        }
+
+        course.removeOrientations(orientation);
+
+
+    }
+
 }
