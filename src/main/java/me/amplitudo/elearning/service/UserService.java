@@ -11,6 +11,7 @@ import me.amplitudo.elearning.service.dto.UserDTO;
 
 import io.github.jhipster.security.RandomUtil;
 
+import me.amplitudo.elearning.web.rest.errors.EntityNotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.cache.CacheManager;
@@ -322,4 +323,20 @@ public class UserService {
             .map(UserDTO::new);
 
     }
+
+    public User getLoggedUser(){
+        log.debug("Logged in user {}", SecurityUtils.getCurrentUserLogin());
+        String login = SecurityUtils.getCurrentUserLogin()
+            .orElseThrow(
+                () -> new EntityNotFoundException("User with given id was not found")
+            );
+        return userRepository.findOneByLogin(login).orElseThrow(() -> new EntityNotFoundException("User with given login was not found"));
+    }
+
+    public Page<UserDTO> findAllMyStudnets(Pageable pageable){
+
+        return userRepository.findMyStudents(pageable,getLoggedUser().getId())
+            .map(UserDTO::new);
+    }
+
 }

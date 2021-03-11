@@ -160,4 +160,12 @@ public class CourseResource {
             .headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, courseOrientationDTO.getCourseId().toString())).build();
     }
 
+    @GetMapping("/courses/courses-to-add-for-user/{id}")
+    public ResponseEntity<List<CourseDTO>> findAllCoursesForStudnet(Pageable pageable, @PathVariable("id") Long id){
+        log.debug("REST for retrieving new coruses for user.");
+        final Page<CourseDTO> page = courseService.findAllCoursesStudentDoesNotHave(pageable, id);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
+        return ResponseEntity.ok().headers(headers).body(page.getContent());
+
+    }
 }

@@ -219,4 +219,15 @@ public class UserResource {
 
     }
 
+    @GetMapping("/users/get-my-students")
+    public ResponseEntity<List<UserDTO>> getMyStudents(Pageable pageable){
+
+        final Page<UserDTO> users = this.userService.findAllMyStudnets(pageable);
+
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), users);
+
+        return new ResponseEntity<List<UserDTO>>(users.getContent(), headers, HttpStatus.OK);
+
+    }
+
 }

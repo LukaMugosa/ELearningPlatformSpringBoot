@@ -43,4 +43,16 @@ public interface CourseRepository extends JpaRepository<Course, Long>, JpaSpecif
         nativeQuery = true)
     Integer countAllByOrientationsIdAndCourseId(Long orientationId, Long courseId);
 
+    @Query(
+        value = "select c.* from course c\n" +
+        "where c.id not in\n" +
+        "(\n" +
+        "    select cu.course_id from course_users cu\n" +
+        "    where cu.users_id = :userId\n" +
+        ")\n" +
+        "and ( c.professor_id = :professorId or c.assistant_id = :professorId )"
+        ,nativeQuery = true
+    )
+    Page<Course> findAllCoursesStudentDoesNotHave(Pageable pageable, @Param("professorId") Long professorId, @Param("userId") Long userId);
+
 }

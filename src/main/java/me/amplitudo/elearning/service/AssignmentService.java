@@ -4,6 +4,7 @@ import me.amplitudo.elearning.domain.Assignment;
 import me.amplitudo.elearning.repository.AssignmentRepository;
 import me.amplitudo.elearning.service.dto.AssignmentDTO;
 import me.amplitudo.elearning.service.mapper.AssignmentMapper;
+import me.amplitudo.elearning.web.rest.errors.EntityNotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -79,6 +80,11 @@ public class AssignmentService {
      */
     public void delete(Long id) {
         log.debug("Request to delete Assignment : {}", id);
+        if(!assignmentRepository.existsById(id)){
+            throw new EntityNotFoundException(
+                "AssignmentProfile with id: " + id + " does not exist."
+            );
+        }
         assignmentRepository.deleteById(id);
     }
 }

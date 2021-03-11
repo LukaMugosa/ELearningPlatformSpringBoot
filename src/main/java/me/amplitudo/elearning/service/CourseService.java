@@ -41,11 +41,13 @@ public class CourseService {
     private final UserRepository userRepository;
     private final YearRepository yearRepository;
 
+    private final UserService userService;
     private final OrientationRepository orientationRepository;
 
     public CourseService(CourseRepository courseRepository,
                          CourseMapper courseMapper,
                          UserRepository userRepository,
+                         UserService userService,
                          OrientationRepository orientationRepository,
                          YearRepository yearRepository) {
         this.courseRepository = courseRepository;
@@ -53,6 +55,7 @@ public class CourseService {
         this.userRepository = userRepository;
         this.orientationRepository = orientationRepository;
         this.yearRepository = yearRepository;
+        this.userService = userService;
     }
 
     /**
@@ -210,6 +213,10 @@ public class CourseService {
         course.removeOrientations(orientation);
 
 
+    }
+
+    public Page<CourseDTO> findAllCoursesStudentDoesNotHave(Pageable pageable, Long userId){
+            return courseRepository.findAllCoursesStudentDoesNotHave(pageable, userService.getLoggedUser().getId(), userId).map(courseMapper::toDto);
     }
 
 }
